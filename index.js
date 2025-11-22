@@ -1,14 +1,14 @@
 let tableContent = '';      // Este es el acumulador de filas de la tabla, donde se va a ir iterando
 const tableBodyElem = document.querySelector('#table_body'); // Se obtiene el cuerpo de la tabla del DOM
 let totalProducts = JSON.parse(window.localStorage.getItem('totalProducts')) || [];      // Aquí se almacenan todos los productos obtenidos de la API
-const searchInputElem = document.getElementById('#searchInput');
+const searchInputElem = document.getElementById('searchInput');
 
 /* function handleProductClick(productId) {
     // Aquí se puede manejar el clic en el producto, por ejemplo, redirigiendo a una página de detalles
     console.log(`Producto clickeado: ${productId}`);
 } */
 
-serachInputElement.addEventListener('input', (event) => {
+searchInputElem.addEventListener('input', (event) => {
     const searchValue = event.target.value;
     const filteredProducts = totalProducts.filter(product => 
         product.title.toLowerCase().includes(searchValue.toLowerCase()));
@@ -20,7 +20,7 @@ const goToProductDetails = (productId) => {
     const selectedProduct = totalProducts.find(product => product.id === productId);
     console.log(`Navegando a los detalles del producto con ID: ${productId}`);
     window.localStorage.setItem('selectedProduct', JSON.stringify(selectedProduct));
-    window.location.href = `product-details.html?id=${productId}`; // Redirige a la página de detalles del producto
+    window.location.href = `products-details.html?id=${productId}`; // Redirige a la página de detalles del producto
 };
 
 const renderTable = (products) => {
@@ -46,7 +46,6 @@ fetch('https://fakestoreapi.com/products')
         totalProducts = products;
         window.localStorage.setItem('totalProducts', JSON.stringify(totalProducts));
         renderTable(totalProducts); // Se renderiza la tabla con todos los productos
-        tableBodyElem.innerHTML = tableContent;
     });
 } else {
     renderTable(totalProducts);
